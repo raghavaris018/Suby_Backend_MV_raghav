@@ -12,7 +12,7 @@ const app = express();
 app.use(cors());
 dotEnv.config();
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 const MONGO_URI = process.env.MONGO_URI;
 
 if (!MONGO_URI) {
@@ -42,7 +42,7 @@ app.listen(PORT, () => {
     console.log(`Server started and running at ${PORT}`);
 });
 
-app.use('/home', (req, res) => {
+app.use('/', (req, res) => {
     res.send("<h1> Welcome to SUBY");
 });
 
