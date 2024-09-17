@@ -1,7 +1,7 @@
 const Vendor = require('../models/Vendor');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const dotEnv = require('dotenv'); 
+const dotEnv = require('dotenv');
 
 dotEnv.config();
 
@@ -38,7 +38,7 @@ const vendorRegister = async(req, res) => {
 const vendorLogin = async(req, res) => {
     const { email, password } = req.body;
     try {
-            const vendor = await Vendor.findOne({ email });
+        const vendor = await Vendor.findOne({ email });
         if (!vendor || !(await bcrypt.compare(password, vendor.password))) {
             return res.status(401).json({ error: "Invalid username or password" })
         }
@@ -46,8 +46,8 @@ const vendorLogin = async(req, res) => {
 
         const vendorId = vendor._id;
 
-        res.status(200).json({ success: "Login successful",token })
-        console.log(email,"this is token:",token);
+        res.status(200).json({ success: "Login successful", token, vendorId })
+        console.log(email, "this is token", token);
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: "Internal server error" });
@@ -67,7 +67,7 @@ const getAllVendors = async(req, res) => {
 
 
 const getVendorById = async(req, res) => {
-    const vendorId = req.params.Raghav;
+    const vendorId = req.params.apple;
 
     try {
         const vendor = await Vendor.findById(vendorId).populate('firm');
@@ -84,4 +84,4 @@ const getVendorById = async(req, res) => {
 }
 
 
-module.exports = { vendorRegister,vendorLogin, getAllVendors, getVendorById }
+module.exports = { vendorRegister, vendorLogin, getAllVendors, getVendorById }
