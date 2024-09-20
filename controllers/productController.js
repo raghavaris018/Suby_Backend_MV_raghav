@@ -69,7 +69,6 @@ const getProductByFirm = async(req, res) => {
         res.status(500).json({ error: "Internal server error" })
     }
 }
-
 // const deleteProductById = async(req, res) => {
 //     try {
 //         const productId = req.params.productId;
